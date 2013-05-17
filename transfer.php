@@ -1,3 +1,6 @@
+
+
+
 <?php 
   require_once("includes/common.php"); 
   nav_start_outer("Transfer");
@@ -30,6 +33,7 @@
     else $result = "Transfer to $recipient failed.";
   }
 ?>
+  
 <p><b>Balance:</b>
 <span id="myZoobars"></span> zoobars</p>
 <form method=POST name=transferform
