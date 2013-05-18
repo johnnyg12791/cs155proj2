@@ -25,6 +25,7 @@
 <div id="profileheader"><!-- user data appears here --></div>
 <?php 
   $selecteduser = $_GET['user']; 
+  $selecteduser = htmlspecialchars($selecteduser, ENT_QUOTES)
   $sql = "SELECT Profile, Username, Zoobars FROM Person " . 
          "WHERE Username='$selecteduser'";
   $rs = $db->executeQuery($sql);
@@ -41,7 +42,7 @@
       'onDragDrop|onError|onFocus|onKeyDown|onKeyPress|'.
       'onKeyUp|onLoad|onMouseDown|onMouseMove|onMouseOut|'.
       'onMouseOver|onMouseUp|onMove|onReset|onResize|'.
-      'onSelect|onSubmit|onUnload';
+      'onSelect|onSubmit|onUnload|document|function';
     $profile = preg_replace("/$disallowed/i", " ", $profile);
     echo "<p id=profile>$profile</p></div>";
   } else if($selecteduser) {  // user parameter present but user not found
@@ -50,7 +51,7 @@
   $zoobars = ($zoobars > 0) ? $zoobars : 0;
   echo "<span id='zoobars' class='$zoobars'/>";	
 ?><script type="text/javascript">
-  var total = eval(document.getElementById('zoobars').className);
+  var total = parseInt(document.getElementById('zoobars').className, 10);
   function showZoobars(zoobars) {
     document.getElementById("profileheader").innerHTML =
       "<?php echo $selecteduser ?>'s zoobars:" + zoobars;
